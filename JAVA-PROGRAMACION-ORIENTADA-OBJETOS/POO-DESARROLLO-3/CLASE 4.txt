@@ -1,0 +1,54 @@
+
+class Racional {
+
+    int numerador, denominador;
+
+    public Racional() {
+        numerador = 0;
+        denominador = 1;
+    }
+
+    public Racional(int numerador) {
+        this.numerador = numerador;
+    }
+
+    public Racional(int denominador, int numerador) {
+        this.numerador = numerador;
+        this.denominador = denominador;
+    }
+
+    public Racional(Racional r) {
+        numerador = r.numerador;
+        denominador = r.denominador;
+    }
+
+    public Racional sumar(Racional r2) {
+        Racional suma = new Racional(numerador + r2.numerador, denominador + r2.denominador);
+        return suma;
+    }
+
+    public void mostrar() {
+        System.out.println(numerador + " / " + denominador);
+    }
+}
+
+public class DemoRacional {
+
+    public static void main(String[] args) {
+
+        Racional r1, r2, r3;
+
+        r1 = new Racional();
+        r2 = new Racional(1, 5);
+        r1 = new Racional(r2);
+        r3 = r2.sumar(r1);
+
+        System.out.println("r1= ");
+        r1.mostrar();
+        System.out.println("r2= ");
+        r2.mostrar();
+        System.out.println("r3= ");
+        r3.mostrar();
+
+    }
+}

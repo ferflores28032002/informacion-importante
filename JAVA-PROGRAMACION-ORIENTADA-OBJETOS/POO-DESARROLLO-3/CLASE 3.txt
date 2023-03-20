@@ -1,0 +1,151 @@
+
+import java.util.*;
+
+public class Lectura {
+
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+
+        System.out.println("Edad: ");
+        int edad = entrada.nextInt();
+        System.out.println("Nombre: ");
+        entrada.nextLine();
+        String name = entrada.nextLine();
+        System.out.println("Sexo: ");
+        char sexo = entrada.next().charAt(0);
+        System.out.println("Hola " + name);
+        System.out.println("Tienes: " + edad + " años de edad");
+        System.out.println("Eres de sexo: " + sexo);
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
+    calcular el area de triangulo, rectangulo y cuadrado
+ */
+
+import java.util.*;
+
+class Triangulo {
+
+    double base, altura;
+    Scanner entrada = new Scanner(System.in);
+
+    public Triangulo() {
+        base = 0.0;
+        altura = 0.0;
+    }
+
+    void leer() {
+        System.out.println("Base: ");
+        base = entrada.nextDouble();
+        System.out.println("Altura: ");
+        altura = entrada.nextDouble();
+    }
+
+    double calcularArea() {
+        double resp;
+        resp = (base * altura) / 2;
+        return resp;
+    }
+
+    void imprimir() {
+        System.out.println("El area del Triangulo es: " + calcularArea());
+    }
+}
+
+//CLASE CUADRADO
+class Cuadrado {
+
+    double lado;
+    Scanner entrada = new Scanner(System.in);
+
+    public Cuadrado() {
+        lado = 0.0;
+    }
+
+    void lectura() {
+        System.out.println("Lado: ");
+        lado = entrada.nextDouble();
+    }
+
+    double calcularArea() {
+        return lado * lado;
+    }
+}
+
+//CLASE RECTANGULO
+class Rectangulo {
+
+    double base, altura;
+    Scanner entrada = new Scanner(System.in);
+
+    public Rectangulo() {
+        base = 0.0;
+        altura = 0.0;
+    }
+
+    void leer() {
+        System.out.println("Base: ");
+        base = entrada.nextDouble();
+        System.out.println("Altura: ");
+        altura = entrada.nextDouble();
+    }
+
+    void calcularArea() {
+        System.out.println("El area del triangulo es: " + (base * altura));
+    }
+
+}
+
+public class Figuras {
+
+    public static void main(String[] args) {
+        int opcion;
+        Scanner entrada = new Scanner(System.in);
+
+        do {
+            System.out.println("MENU");
+            System.out.println("1-TRIANGULO");
+            System.out.println("2-CUADRADO");
+            System.out.println("3-RECTANGULO");
+            System.out.println("4-SALIR");
+            System.out.println("\nOPCION:");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    Triangulo tria = new Triangulo();
+                    tria.leer();
+                    tria.calcularArea();
+                    tria.imprimir();
+                    break;
+                case 2:
+                    Cuadrado cua = new Cuadrado();
+                    cua.lectura();
+                    System.out.println("El area del triangulo es: " + cua.calcularArea());
+                    break;
+                case 3:
+                    Rectangulo rec = new Rectangulo();
+                    rec.leer();
+                    rec.calcularArea();
+                    break;
+                case 4:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta");
+                    break;
+            }
+        } while (opcion != 4);
+
+    }
+}
+

@@ -1,0 +1,87 @@
+
+import java.util.*;
+
+class persona {
+
+    int num;
+    int edad;
+
+    public persona() {
+        this.num = 12;
+        this.edad = 15;
+    }
+}
+
+public class ComercioVentas {
+
+    public static void main(String[] args) {
+        //Definir array en java
+        int[] mi_arreglo = new int[5];
+        String[] names = new String[6];
+
+        mi_arreglo[0] = 4;
+        mi_arreglo[1] = 5;
+        mi_arreglo[2] = 6;
+        mi_arreglo[3] = 7;
+
+        //Generar numeros aleatorios
+        int[] numAletarios = new int[10];
+
+        for (int i = 0; i < numAletarios.length; i++) {
+            numAletarios[i] = (int) Math.round(Math.random() * 100);
+        }
+
+        for (int i = 0; i < numAletarios.length; i++) {
+            System.out.println(numAletarios[i]);
+        }
+
+        for (int i = 0; i < mi_arreglo.length; i++) {
+            System.out.println(mi_arreglo[i]);
+
+        }
+
+        //Matrices 
+        int[][] matrix = new int[2][2];
+
+        matrix[0][0] = 15;
+        matrix[0][1] = 15;
+
+        matrix[1][0] = 112;
+        matrix[1][1] = 112;
+
+        //Definir la hora 
+        int anio = 11;
+        int dia = 23;
+        int mes = 04;
+        Date fechaDada;
+        Date fechaDada2;
+        GregorianCalendar calendario = new GregorianCalendar(anio, mes - 1, dia);
+        GregorianCalendar calendario2 = new GregorianCalendar();
+        fechaDada = calendario.getTime();
+        fechaDada2 = calendario2.getTime();
+
+        System.out.println("Fecha: " + fechaDada);
+        System.out.println("Fecha2: " + fechaDada2);
+
+        System.out.println("El valor almacenado en la posicion 0,2: " + matrix[0][1]);
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                System.out.println("Posicion: " + i + " " + j + matrix[i][j]);
+            }
+        }
+
+        //Instancias de arreglo
+        persona[] personas = new persona[3];
+
+        personas[0] = new persona();
+        personas[1] = new persona();
+        personas[2] = new persona();
+
+        for (int i = 0; i < personas.length; i++) {
+            System.out.println(personas[i].edad);
+        }
+
+        System.out.println("Hola");
+    }
+}

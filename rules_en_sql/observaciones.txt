@@ -1,0 +1,13 @@
+
+/*
+	Las reglas definen los valores aceptables de la columna
+	o tipo de datos al que se le aplican
+
+	* Esta caracteristica sera removida de futuras 
+	implementaciones
+
+	Sintaxis
+
+	CREATE RULE [esquema].[nombre_regla]
+	AS condicion(es)
+*/

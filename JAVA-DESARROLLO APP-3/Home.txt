@@ -1,0 +1,102 @@
+/*
+    Define tres clases, casa, salonCasa y cocinaCasa. La clase salonCasa debe tener como atributos
+    numerosDeTelevisores (int) y typoSalon (String) y disponer de un constructor que los inicialice a
+    0 y desconocido. La clase cocinaCasa debe tener como atributos: esIndependientes (boolean) y 
+    numerosDeFuego (int) y un constructor que los inicialice a false y 0. La clase casa tendra los 
+    siguientes atributos: superficie (double), direccion (string), salonCasa (tipo salonCasa) 
+    y cocina (tipo cocinaCasa) defina un constructor para la clase casa que establezca sus valores
+    de defecto los atributos simples y que cree nuevos objetos si se trata de atributos objetos.
+    Compila el codigo para comprobar que no presente errores, crea un objeto de tipo casa. Comprueba
+    que se inicializaron correctamente consultando el valor de sus atributos despues de haber creado
+    los objetos.
+ */
+
+import java.lang.*;
+
+class Casa {
+
+    double superficie;
+    String direccion;
+
+    //Instancias
+    SalonCasa salonHouse1 = new SalonCasa();
+    SalonCasa salonHouse2 = new SalonCasa(5, "Salon Multiuso");
+    CocinaCasa cocinaCasa1 = new CocinaCasa();
+    CocinaCasa cocinaCasa2 = new CocinaCasa(true, 5);
+
+    public Casa() {
+        this.superficie = 120.00;
+        this.direccion = "De la UNP tres cuadras al este";
+    }
+
+    //Método getters
+    public String getDatosPorDefectos() {
+        return "superficie: " + this.superficie
+                + "\ndirección: " + this.direccion
+                + "\ncocina: " + this.cocinaCasa1.esIndependiente
+                + "\nNumero Fuego: " + this.cocinaCasa1.numeroFuego
+                + "\nsalon casa: " + this.salonHouse1.tipoSalon
+                + "\nNros Televiso: " + this.salonHouse1.numeroDeTelevisores;
+    }
+
+    public String getDatosModificados() {
+        return "superficie: " + this.superficie
+                + "\ndirección: " + this.direccion
+                + "\ncocina: " + this.cocinaCasa2.esIndependiente
+                + "\nNumero Fuego: " + this.cocinaCasa2.numeroFuego
+                + "\nsalon casa: " + this.salonHouse2.tipoSalon
+                + "\nNros Televiso: " + this.salonHouse2.numeroDeTelevisores;
+    }
+
+}
+
+class SalonCasa {
+
+    int numeroDeTelevisores;
+    String tipoSalon;
+
+    public SalonCasa() {
+        this.numeroDeTelevisores = 0;
+        this.tipoSalon = "Desconocido";
+    }
+
+    //Sobrecarga de constructores
+    public SalonCasa(int numeroDeTelevisores, String tipoSalon) {
+        this.numeroDeTelevisores = numeroDeTelevisores;
+        this.tipoSalon = tipoSalon;
+    }
+}
+
+class CocinaCasa {
+
+    boolean esIndependiente;
+    int numeroFuego;
+
+    public CocinaCasa() {
+        this.esIndependiente = false;
+        this.numeroFuego = 0;
+    }
+
+    //Sobrecarga de constructores
+    public CocinaCasa(boolean esIndependiente, int numeroFuego) {
+        this.esIndependiente = esIndependiente;
+        this.numeroFuego = numeroFuego;
+    }
+
+}
+
+public class Home {
+
+    public static void main(String[] args) {
+        Casa casa1 = new Casa();
+        Casa casa2 = new Casa();
+
+        System.out.println("\t ***** CASA #1 *****\n");
+        System.out.println(casa1.getDatosPorDefectos());
+
+        System.out.println("\n\t ***** CASA #2 *****\n");
+        System.out.println(casa2.getDatosModificados());
+
+    }
+
+}

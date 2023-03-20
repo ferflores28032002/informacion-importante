@@ -1,0 +1,74 @@
+
+import java.util.*;
+
+class Productos {
+
+    int codigo;
+    private String descripcion;
+    private double precioUnitario;
+
+    public Productos(int codigo, String descripcion, double precioUnitario) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.precioUnitario = precioUnitario;
+    }
+
+    //Método Getters
+    public String getMostrarProductos() {
+        return "\nDatos del producto: \n\ncodigo: " + this.codigo
+                + "\ndescripcion: " + this.descripcion
+                + "\nPrecio: " + this.precioUnitario;
+    }
+}
+
+class VentasRealizadas {
+
+    //Tipo de dato DATE la usamos atraves de java.utitl
+    private Date fechaAndHora;
+    private int NumVendedor;
+    private int CodigoProductoVendido;
+    private int cantidadVendida;
+    private String tipoPago;
+
+    //Hacemos una instancia para hallar la fecha y hora actual de registro
+    GregorianCalendar registro = new GregorianCalendar();
+
+    public VentasRealizadas(int NumVendedor, Productos CodigoProductoVendido, int cantidadVendida, String tipoPago) {
+        this.fechaAndHora = registro.getTime();
+        this.NumVendedor = NumVendedor;
+        this.CodigoProductoVendido = CodigoProductoVendido.codigo;
+        this.cantidadVendida = cantidadVendida;
+        this.tipoPago = tipoPago;
+    }
+
+    //Metodo getters que muestre todo
+    public String getMostrarVentas() {
+        return "\nLos datos de la venta son: "
+                + "\n\nFecha y Hora: " + this.fechaAndHora
+                + "\nNumero Vendedor: " + this.NumVendedor
+                + "\nCodigo Producto Vendido: " + this.CodigoProductoVendido
+                + "\nCantidad Vendida: " + this.cantidadVendida
+                + "\nTipo de pago: " + this.tipoPago;
+    }
+
+}
+
+public class Ventas {
+
+    public static void main(String[] args) {
+
+        //Instanciamos la clase productos
+        Productos arroz = new Productos(1, "Se come con frijoles", 12.456);
+        Productos Frijoles = new Productos(2, "Se come con arroz", 134.456);
+
+        //Instanciamos la clase ventas y le passamos por argumentos el codigo del 
+        //producto instanciado (NOTA: el constructor de la clase Ventas recibe un 
+        //Tipo de datos claseProducto)
+        VentasRealizadas venta1 = new VentasRealizadas(1, arroz, 3, "Efectivo");
+        VentasRealizadas venta2 = new VentasRealizadas(2, Frijoles, 7, "Debito");
+
+        System.out.println(venta1.getMostrarVentas());
+        System.out.println(venta2.getMostrarVentas());
+
+    }
+}

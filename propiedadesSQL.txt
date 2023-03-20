@@ -1,0 +1,294 @@
+-- Mostrar la cantidad de empleado contratados en el año 2003
+SELECT COUNT(*) as 'CantidadEmpleados'
+FROM HR.Employees
+--WHERE hiredate>='20030101' AND hiredate<='20031231'
+--WHERE YEAR(hiredate)=2003 --La funcion YEAR() retorna el año de un
+WHERE hiredate BETWEEN '20030101' AND '20031231' --BETWEEN Se utiliza para definir rangos
+
+
+
+/* MIN: Devuelve el valor minimo del campo que se especifique
+si hay agrupamiento, devuelve el valor minimo de cada grupo
+*/
+--Mostrar el pedido de menor carga realizado
+SELECT MIN(freight) as 'CargaMinima'
+FROM sales.Orders ;
+
+
+
+/* MAX: Devuelve el valor maximo del campo que se especifique
+si hay agrupamiento, devuelve el valor maximo de cada grupo
+*/
+--Mostrar el pedido de mayor carga realizado
+SELECT MAX(freight) as 'CargaMaxima'
+FROM sales.Orders ;
+
+
+
+/*
+SUM: Suma los valores del campo(numerico) que especifiquemos, si hay agrupamiento devuelve la suma de cada grupo
+*/
+--Mostrar la carga total de los pedidos realizados
+SELECT SUM(freight) as 'CargaTotal'
+FROM sales.Orders ;
+
+
+
+/*
+AVG: Devuelve el promedio del campo(Numerico) que indiquemos, si hay agrupamiento, devuelve el promedio de cada grupo
+*/
+--Mostrar el promedio de los pedidos realizados
+SELECT AVG(freight) as 'PromedioCarga'
+FROM sales.Orders ;
+
+
+
+/*
+LIKE: Se utiliza en la clausula WHERE para buscar un patron especifico en una columna (texto)
+		Suele acompañarse de comodines:
+		%: Representa cero, uno o mas caracteres
+		_: Representa un solo caracter
+*/
+-- Mostrar los empleados cuya primera letra del apellido sea D
+SELECT*
+FROM Hr.Employees
+WHERE lastname LIKE 'd%';
+--Mostrar los empleados cuyo apelido se de 5 caracteres y el primer caracter sea una d
+SELECT*
+FROM Hr.Employees
+WHERE lastname LIKE 'd____';
+--Mostrar los empleados que tengan en el cargo la palabra sales
+SELECT*
+From Hr.Employees
+WHERE title like '%Sales%';
+
+
+
+/*
+IN: Permite definir en la clausula WHERE multiples valores
+*/
+--Mostrar el id de pedido y la carga de los pedidos realizados en Polonia, Italia y España
+SELECT orderid, shipcountry, freight
+FROM Sales.Orders
+WHERE shipcountry IN ('Poland','Italy','Spain')
+ORDER BY shipcity, freight;
+
+
+
+/*
+	LEFT: Extrae un numero de caracteres de una cadena de caracteres, comenzando por la izquierda.
+	RIGHT: Extrae un numero de caracteres de una cadena de caracteres, comenzando por la derecha.
+*/
+--Mostrar en la primera letra del nombre junto con el apellido, esto sera un campo llamado usuario
+SELECT firstname,lastname, LEFT(firstname,1)+ lastname as 'Usuario'
+FROM Hr.Employees
+/*
+	LOWER: Convierte un texto a minusculas
+	UPPER: Convierte un texto a mayusculas
+	LEN: Retorna o devuelve la cantidad de caracteres de una cadena
+*/
+--Mostrar el usuario en mayusculas y en minusculas y la cantidad de letras de usuario
+SELECT firstname, lastname, 
+	   LOWER(LEFT(Firstname,1)+lastname) as 'UsuarioMin',
+	   UPPER(LEFT(Firstname,1)+lastname) as 'UsuarioMay',
+	   LEN(LEFT(Firstname,1)+lastname) as 'CantidadLetrasUsuario'
+FROM Hr.Employees;
+--Mostrar nombres y apellidos de los empleados en un solo campo
+SELECT CONCAT(firstname,' ',lastname) as 'Nombre'
+FROM Hr.Employees;
+
+
+
+/*
+	CAST(): Convierte un valor de cualquier tipo a otro tipo especificado.
+
+	CONVERT(): Convierte un valor de cualquier tipo a otro tipo especificado.
+*/
+--Convertir de decimal a entero con CAST
+SELECT CAST (freight as int) as 'carga'
+FROM Sales.Orders
+--Convertir de decimal a entero con CONVERT
+SELECT CONVERT(int, freight) as 'Carga'
+FROM Sales.Orders
+
+
+/*
+	ISNULL(): Returna el valor especificado si la expresion es NULL, de lo contrario retorna la expresion.
+*/
+SELECT orderid,ISNULL(shipregion,'Sin Region') as 'Region'  
+FROM Sales.Orders 
+
+
+
+/*
+	DATEPART(): Devuelve una parte especifica de un dato de tipo datetime.
+	DATEPART(intervalo,date)
+	Intervalo puede ser:
+				year, yyyy, yy = año.
+				quarter, qq, q = Devuelve en que cuarto del año se ubica la fecha.
+				month, mm, m= Devuelve el mes.
+				dayofyear, dy, y= devuelve el numero del dia en el año.
+				day, dd, d= Devuelve el dia del mes.
+				week, ww, wk= Devuelve el numero de la semana.
+				weekday, dw, w= Devuelve el dia de la semana.
+				hour, hh= Devuelve la hora.
+				minute, mi, n= Devuelve los minutos.
+				second, ss, s= Devuelve los segundos.
+				millisecond, ms= Devuelve los milisegundos.
+*/
+--Mostrar en orden dia, mes y año en que fue ordenada.
+SELECT orderid, DATEPART(day, orderdate) as 'Dia',
+	   DATEPART(month,orderdate) as 'Mes',
+	   DATEPART(year,orderdate) as 'Año',
+	   CONCAT(
+			DATEPART(day, orderdate),'/',
+			DATEPART(month,orderdate),'/',
+			DATEPART(year,orderdate)
+			) as 'Fecha Orden'
+FROM Sales.Orders
+
+
+
+/*
+	TOP: Especifica cuantos registros se van a retornar
+*/
+--Mostrar las 10 ultimas ordenes realizadas
+SELECT TOP 10 *
+FROM Sales.Orders
+ORDER BY  orderdate DESC;
+
+
+
+/*
+	DATEDIFF(): Devuelve la diferencia entre dos fechas
+	DATEDIFF(intervalo,fecha1,fecha2)
+*/
+SELECT DATEDIFF(day,'20021021', getdate()) as 'Dias Vividos'
+
+
+
+/*
+	INNER JOIN: Consiste en combinar cada fila de una tabla con cada fila de otra tabla, seleccionando aquellas donde se cumpla una determinada condicion.
+
+	Estas tablas generalmente estan relaconadas por una llave foranea
+
+Obtener los proveedores de japon y las claves de productos que distribuyen
+*/
+SELECT S.companyname, S.country, P.productname, P.productid
+FROM Production.Suppliers as S INNER JOIN Production.Products as P ON S.supplierid= P.supplierid
+WHERE country='Japan'
+--Mostrar los proveedores y los productos que distribuyen, adenas de la categoria a la que pertenecen estos productos
+SELECT S.supplierid, S.companyname as 'Proveedor', P.productname as 'Nombre Producto', P.productid as 'Id', C.categoryname as 'Categoria'
+FROM Production.Suppliers as S INNER JOIN Production.Products as P 
+ON S.supplierid=P.supplierid INNER JOIN Production.Categories as C
+ON P.categoryid = C.categoryid
+--
+SELECT S.supplierid,S.companyname, P.productid, P.productname
+FROM Production.Products as P INNER JOIN Production.Suppliers as S
+	 ON P.supplierid = S.supplierid
+
+	--REGLAS
+
+--Se desea crear un nuevo tipo de datos para ser utilizado en campos que almacenen números de tarjeta de crédito, este campo deberá de ser obligatorio y cumplir con el formato de una tarjeta de crédito (0000 0000 0000 0000) donde 0 representa cualquier número. 
+
+Use AdventureWorks2012
+GO
+
+
+CREATE TABLE TempTab (
+	Id int primary key identity(1,1),
+	Nombre varchar(25) not null,
+	NoTarjeta varchar(19) not null
+);
+
+
+CREATE RULE dbo.FTarjetaCredito
+AS
+@values LIKE '[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]';
+
+
+EXEC sys.sp_bindrule 'FTarjetaCredito', 'TempTab.NoTarjeta'
+
+
+insert into TempTable (Nombre, NoTarjeta)
+VALUES (
+	'Norman',
+	
+	'1234 5678 9101 1121'
+);
+
+SELECT * FROM TempTab
+
+
+
+--Se desea crear un nuevo tipo de datos para utilizarlo en campos que almacenen correos electrónicos, este tipo de dato tendrá  que ser obligatorio y ajustarse al formato de un correo electrónico,  utilice los mecanismos necesarios para crear este nuevo tipo de datos
+
+CREATE TABLE TempTab2 (
+	id int primary key identity(1,1),
+	nombre varchar(25) not null,
+	CorreoElectronico varchar(16)
+)
+
+/*Formato para correo electronico */
+
+CREATE RULE dbo.FCorreo
+AS
+@values LIKE '%@%.%';
+
+EXEC sys.sp_bindrule 'FCorreo', 'TempTab2.CorreoElectronico'
+
+insert into TempTab2 (nombre, CorreoElectronico)
+VALUES (
+	'Norman',
+	'norman@gmail.com'
+);
+
+Select * from TempTab2
+
+--Se desea crear u nuevo tipo de dato para utilizarlo en campos que almacenen números telefónicos, este campo podrá ser nulo, y deberá de cumplir el formato de un número de teléfono (+000 0000-0000) donde 0 representa cualquier número.	
+
+CREATE TABLE tempTab3 (
+	id int primary key identity(1,1),
+	nombre varchar(25) not null,
+	Celular varchar(14) null
+);
+
+
+CREATE RULE dbo.FCelular
+AS
+@values LIKE '+[0-9][0-9][0-9] [0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+
+
+EXEC sys.sp_bindrule 'FTelefono', 'tempTab3.Celular'
+
+
+insert into tempTab3 (nombre, Celular)
+VALUES (
+	'Norman',
+	
+	'+505 6969-6969'
+);
+SELECT * FROM tempTab3
+
+--Tipos de datos creados por el usuario
+
+/*
+	Cuando se trabaja con bases de datos y procedimientos almacenados, no veremes en la necesidad
+	de pasa al procedimiento almacenado multiples valores en unico parametro.
+
+	SQL Server no ofrece la posibilidad de crear tipos de tablas definidas por el usuario, con
+	multiples columnas y tipos de datos.
+
+	La ventaja de crear tipos de datos tabla, es que estos pueden ser reutilizados, en distintos
+	procedimientos almacenados.
+
+	Sintaxis
+	
+	CREATE TYPE [esquema].[nombreTipoTabla] AS TABLE
+	(
+		nombreColumna1 tipoDato(longitud),
+		nombreColumna2 tipoDato(longitud)
+	)
+	GO
+
+*/

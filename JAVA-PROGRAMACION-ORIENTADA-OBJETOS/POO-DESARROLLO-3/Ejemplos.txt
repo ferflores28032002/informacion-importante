@@ -1,0 +1,40 @@
+
+import java.util.*;
+
+public class Coches {
+    
+    private int ruedas;
+    public float t=2.5f;
+    public static char letra = 'A';
+    public static boolean res = true;
+    
+    final int MESES = 12; //Constantes
+              
+           
+    public Coches(){ //Constructores
+        ruedas = 4;
+    }
+    
+    public static void main(String [] arg){
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Hola, Escriba su nombre: ");
+        String name = entrada.nextLine();
+        System.out.println("Hola estimado "+name+ " !");
+        
+    }
+}
+
+
+
+
+
+public class Laluna {
+    public static void main(String [] arg){
+        final int LUNA = 238557;
+        double lunakilo;
+        lunakilo=LUNA*1.60;
+        System.out.println("Hola desde la clase luna " + LUNA);
+        System.out.println("En kilometros es: " + lunakilo+ " km");
+    }
+}
+

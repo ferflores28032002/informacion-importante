@@ -1,0 +1,135 @@
+package ejerciciosdeejemplos;
+
+public class EjerciciosDeEjemplos {
+
+    public static void main(String[] args) {
+        
+        final int DIAS_SEMANA=7;
+        final int DIAS_LABORALES=5;
+        
+        System.out.println("El numero de dias de la semana son: " + DIAS_SEMANA);
+        System.out.println("\nEl Numero de dias laborales son: " + DIAS_LABORALES);
+    }
+    
+}
+
+
+
+
+import java.io.*;
+//import java.util.Scanner;
+
+public class Cadena {
+    public static void main(String [] arg) throws IOException{
+        
+        //Scanner entrada = new Scanner(System.in);
+        String nombre , apellido;
+        String saludos = "Hola a todos";
+        
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        System.out.println("Nombres: ");
+        nombre=entrada.readLine();
+        //nombre = entrada.nextLine();
+        System.out.println("Apellidos: ");
+        apellido=entrada.readLine();
+        //apellido = entrada.nextLine();
+        System.out.println("El nombre es: " + nombre);
+        System.out.println("El apellido es: " + apellido);
+        System.out.println(saludos); 
+    }
+}
+
+
+
+
+import java.io.*;
+
+
+public class Sumando {
+    public static void main(String [] arg) throws IOException{
+        int numero1, numero2;
+        int suma;
+        
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        
+        System.out.println("Ingrese el numero 1: ");
+        System.out.flush();
+        numero1 = Integer.parseInt(entrada.readLine());
+        System.out.flush();
+        System.out.println("Ingrese el numero 2: ");
+        numero2 = Integer.parseInt(entrada.readLine());
+        
+        suma = numero1 + numero2;
+        
+        System.out.println("El numero 1 es: " + numero1 + ". El numero 2 es: " + numero2);
+        System.out.println("La suma es: " + suma);
+    }
+}
+
+
+
+import java.io.*;
+public class Calculos {
+   
+    
+    public static void main(String [] arg) throws IOException
+    {
+        double base, altura;
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+    
+        System.out.println("Base: ");
+        base = Double.parseDouble(entrada.readLine());
+        System.out.println("Altura: ");
+        altura = Double.parseDouble(entrada.readLine());
+        System.out.println("El area es: " + base * altura/2);
+    }
+
+    
+    
+}
+
+
+import java.util.*;
+import java.io.*;
+        
+
+class Rectangulo{
+    
+    double base,altura;
+    
+    public Rectangulo(double base, double altura){
+        this.base=base;
+        this.altura=altura;
+    }
+    
+    public double Area(){
+        return base*altura;
+    }
+}
+
+public class Imagen {
+    public static void main(String [] arg) throws IOException{
+        
+        //Utilizamos el scanner
+        Scanner entrada = new Scanner(System.in);
+        //BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        double Base, altura;
+        
+        System.out.println("Base: ");
+        Base=entrada.nextDouble();
+        //Base=Double.parseDouble(entrada.readLine());
+        
+        System.out.println("Altura: ");
+        altura=entrada.nextDouble();
+        //altura=Double.parseDouble(entrada.readLine());
+        
+        
+        Rectangulo rect1 = new Rectangulo(Base, altura);
+        System.out.println(rect1.Area());
+    }
+}
+
+
+

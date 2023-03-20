@@ -1,0 +1,302 @@
+
+import java.util.*;
+
+class Persona {
+
+    String nombre;
+    int edad;
+
+    public Persona(String persona, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public void mostrar() {
+        System.out.println("Nombre: " + this.nombre);
+        System.out.println("Edad: " + this.edad);
+    }
+}
+
+class Empleado extends Persona {
+
+    int numEmp;
+
+    public Empleado(String nombre, int edad, int numEmp) {
+        super(nombre, edad);
+        this.numEmp = numEmp;
+
+    }
+
+    @Override
+    public void mostrar() {
+        super.mostrar();
+        System.out.println("No. Empleado: " + numEmp);
+    }
+}
+
+class Estudiante extends Persona {
+
+    int carnet;
+
+    public Estudiante(String nombre, int edad, int carnet) {
+        super(nombre, edad);
+        this.carnet = carnet;
+    }
+
+    @Override
+    public void mostrar() {
+        super.mostrar();
+        System.out.println("Carnet: " + carnet);
+    }
+}
+
+public class Registro {
+
+    public static void main(String[] args) {
+        String nombre;
+        int edad, carnet, numEmp;
+        int opcion;
+        Scanner entrada = new Scanner(System.in);
+
+        Empleado emp;
+        Estudiante es;
+
+        System.out.println("Digite la opcion: ");
+        System.out.println("1-Empleado\n2-Estudiante\n3-salir");
+        opcion = entrada.nextByte();
+
+        while (opcion != 3) {
+            System.out.println("Nombre");
+            nombre = entrada.nextLine();
+           
+            System.out.println("Edad");
+            edad = entrada.nextInt();
+  
+            switch (opcion) {
+                case 1:
+                    System.out.println("No. empleado");
+                    numEmp = entrada.nextInt();
+                    emp = new Empleado(nombre, edad, numEmp);
+                    emp.mostrar();
+                    break;
+                case 2:
+                    System.out.println("No. Carnet");
+                    carnet = entrada.nextInt();
+                    es = new Estudiante(nombre, edad, carnet);
+                    es.mostrar();
+                    break;
+                case 3:
+                    System.exit(0);
+                default:
+                    System.out.println("Opcion no valida");
+            }
+        }
+
+    }
+}
+
+
+//otro problemaaaaaaaa
+
+
+
+import java.util.*;
+
+//Clase padre
+class Vehiculo {
+
+    String marca, modelo;
+    int placa;
+    Scanner entrada = new Scanner(System.in);
+
+    public Vehiculo() {
+        marca = "";
+        modelo = "";
+        placa = 0;
+    }
+
+    public void leer() {
+        System.out.println("Marca");
+        marca = entrada.nextLine();
+        System.out.println("Modelo");
+        modelo = entrada.nextLine();
+        System.out.println("Placa");
+        placa = entrada.nextInt();
+    }
+
+    public void ver() {
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Placa: " + placa);
+    }
+}
+
+//clase autobus - derivada o subclase
+class Autobus extends Vehiculo {
+
+    int capacidad;
+
+    public Autobus() {
+        super();
+        capacidad = 0;
+    }
+
+    @Override
+    public void leer() {
+        super.leer();
+        System.out.println("Capacidad");
+        capacidad = entrada.nextInt();
+    }
+
+    @Override
+    public void ver() {
+        super.ver();
+        System.out.println("Capacidad: " + capacidad);
+    }
+}
+
+//Clase motocicleta - derivada o subclase
+class Motocicleta extends Vehiculo {
+
+    int catp;
+
+    public Motocicleta() {
+        super();
+        catp = 0;
+    }
+
+    @Override
+    public void leer() {
+        super.leer();
+        System.out.println("Cantidad Pasajeros");
+        catp = entrada.nextInt();
+    }
+
+    @Override
+    public void ver() {
+        super.ver();
+        System.out.println("Cantidad Pasajeros: " + catp);
+    }
+}
+
+public class Transporte {
+
+    public static void main(String[] args) {
+        int opcion;
+        Scanner entrada = new Scanner(System.in);
+
+        Autobus auto;
+        Motocicleta moto;
+
+        do {
+            System.out.println("Digite la opcion: ");
+            System.out.println("1.Autobus\n2.Motocicleta\n3.salir");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    auto = new Autobus();
+                    auto.leer();
+                    auto.ver();
+                    break;
+                case 2:
+                    moto = new Motocicleta();
+                    moto.leer();
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta");
+            }
+        } while (opcion != 3);
+
+    }
+}
+
+
+=============================================================================
+
+
+package FigurasVarias;
+
+public class Cuadrado extends ObjGeometrico{
+    double x1, y1;
+    public Cuadrado(double x, double y, double t1, double t2){
+        super(x,y);
+        x1=t1;
+        y1=t2;
+    }
+    
+    public double area(){
+        double a, b;
+        a=px-x1;
+        b=py-y1;
+        return 2*(a*a+b*b);
+    }
+}
+
+
+
+package FigurasVarias;
+
+public class Circulo extends ObjGeometrico {
+
+    double r;
+    final double PI = 3.1416;
+
+    public Circulo(double x, double y, double r) {
+        super(x, y);
+        this.r = r;
+    }
+
+    public double area() { 
+        return PI * r * r;
+    }
+}
+
+
+
+//class base - padre
+package FigurasVarias;
+
+public class ObjGeometrico {
+    double px, py;
+    public ObjGeometrico(double x , double y){
+        px=x;
+        py=y;
+    }
+    public ObjGeometrico(){
+        px=py=0;
+    }
+    public void imprimirCentro(){
+        System.out.println(" ( " + px + " . " + py + " )");
+    }
+}
+
+
+
+
+
+
+//PRINCIPAL
+
+import FigurasVarias.Circulo;
+import FigurasVarias.Cuadrado;
+
+
+public class Principal {
+    public static void main(String[] args) {
+        Circulo cr=new Circulo(2.0, 2.5, 20.4);
+        Cuadrado cd=new Cuadrado(2.0, 2.5, 20.4, 3.5);
+        
+        System.out.println("Centro del circulo");
+        cr.imprimirCentro();
+        System.out.println("Centro del cuadrado");
+        cd.imprimirCentro();
+        
+        System.out.println("Area del circulo: " + cr.area());
+        System.out.println("Area del cuadrado: " + cd.area());
+    }
+}
+

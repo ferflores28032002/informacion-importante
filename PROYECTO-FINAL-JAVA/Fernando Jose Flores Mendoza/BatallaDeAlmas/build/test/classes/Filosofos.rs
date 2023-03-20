@@ -1,0 +1,4 @@
+Palillos
+Filosofo
+Silla
+Filosofos

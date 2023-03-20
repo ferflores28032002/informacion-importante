@@ -1,0 +1,92 @@
+/*
+Cree la clase Ahorro. Utilice un dato miembro para contener la tasa de interés anual de cada ahorrador. 
+Cada miembro de la clase contiene un dato llamado Balance que indica la cifra que actualmente tiene 
+depositada el ahorrador. Proporcione un método calculoInteresMensual que calcule el interés mensual 
+ multiplicando el balance por la tasa de interés anual y dividiendo el resultado entre 12, este interés 
+ debe sumarse a balance.
+ Proporciones el método modificarTasa que establezca la tasa de interés anual a un nuevo valor. 
+ Escriba un programa controlador que pruebe la clase Ahorro. Instancia dos objetos de Ahorro, 
+ ahorrador1, ahorrador2, con saldo de $2000. $3000 respectivamente.
+ Establezca la tasa de interés anual a 3%, luego calcule el interés mensual e imprima los nuevos saldos de 
+ los ahorradores. Luego establezca tasa de interés anual a 4% y calcule el interés del próximo mes, 
+ imprima los nuevos saldos de los ahorradores.
+ */
+import java.io.*;
+
+public class TwoExercises 
+{
+    public static void main ( String arg[] ) throws IOException
+    {
+        BufferedReader entrada=new BufferedReader(new InputStreamReader(System.in));
+        
+         double ahorrador1 = 2000; 
+         double ahorrador2 = 3000;
+         int opcion;
+
+         do {
+
+            System.out.println("MENU DE CUENTAS");
+            System.out.println("1. CUENTA UNO");
+            System.out.println("2. CUENTA DOS");
+            System.out.println("0 Salir");
+            System.out.println("opcion: ");
+            opcion = Integer.parseInt(entrada.readLine());
+
+
+            switch(opcion)
+            {
+                case 1:  Ahorro aho1=new Ahorro( ahorrador1 );
+                       System.out.println("Interes mensual al 3% del interes anual: " + aho1.calculoInteresMensual());
+                       System.out.println("Balance sumado el interes mensual: " + aho1.calculoInteresMensual() + ahorrador1 );
+                       System.out.println("Interes mensual al 4% del interes anual: " + aho1.modificarTasa() );
+                       System.out.println("Balance sumado el interes mensual: " + aho1.modificarTasa() + ahorrador1 );
+                    break;
+                case 2: Ahorro aho2=new Ahorro(ahorrador2);
+                       System.out.println("Interes mensual al 3% del interes anual: " + aho2.calculoInteresMensual());
+                       System.out.println("Balance sumado el interes mensual: " + aho2.calculoInteresMensual() + ahorrador2 );
+                       System.out.println("Interes mensual al 4% del interes anual: " + aho2.modificarTasa() );
+                       System.out.println("Balance sumado el interes mensual: " + aho2.modificarTasa() + ahorrador2 );
+                    break;
+
+                case 0:
+                       System.out.println("Muchas gracias :)");
+                       System.exit(0);
+                       break;
+
+                default: System.out.println("Error.opcion incorrecta");
+                       break;
+            }
+         
+        }while(opcion != 0);
+             
+    }
+}
+
+class Ahorro
+{
+    double balance;
+    double interes;
+    double interes1 = 0.03;
+    double interes2 = 0.04;
+    
+    public Ahorro( double a)
+    {
+        this.balance=a;
+    }
+    
+    /*Calcule el interés mensual 
+    multiplicando el balance por la tasa de interés anual y dividiendo el resultado entre 12, este interés 
+    debe sumarse a balance.*/
+ 
+    double calculoInteresMensual()
+    {
+        interes = ((balance * interes1) / 12);
+        return interes;
+    }
+    
+    double modificarTasa()
+    {
+        interes = ((balance * interes2) / 12);
+        return interes;
+    }
+}
